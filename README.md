@@ -1,46 +1,72 @@
-# Getting Started with Create React App
+# Matter.js SVG Physics Simulation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a physics simulation using Matter.js to render and animate complex SVG shapes. The project allows SVG shapes to interact with physics constraints, such as gravity, walls, and collisions, within a React environment.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **SVG Shape Physics**: Convert SVG paths into physics bodies that interact with walls, gravity, and each other.
+- **Physics Engine**: Powered by Matter.js, enabling real-time physics-based simulation.
+- **Mouse Interaction**: Users can drag and move objects within the simulation using a mouse control interface.
+- **Responsive Design**: The physics simulation adapts to the container's size.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React**: UI framework for building the user interface.
+- **Matter.js**: 2D physics engine for running the physics simulation.
+- **TypeScript**: For static typing and better developer experience.
+- **SVGs**: Complex shapes for use in the simulation.
+- **poly-decomp**: Library for breaking down complex polygons into simpler convex shapes for physics calculations.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone https://github.com/yourusername/matterjs-svg-physics.git
+   ```
 
-### `npm run build`
+2. Navigate to the project directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   cd matterjs-svg-physics
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Install the dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The project should now be running on `http://localhost:3000`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How It Works
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **Engine Setup**: The Matter.js engine and renderer are initialized in the `useEffect` hook. Walls and ground are created as static bodies to contain the SVG shapes.
+- **SVG Paths**: The paths defined in the `<svg>` tags are converted into physics bodies using Matter.js’ `Svg.pathToVertices()` method.
+- **Mouse Interaction**: Users can interact with the SVG shapes by dragging them within the canvas, enabled by Matter.js' `MouseConstraint`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## File Overview
 
-## Learn More
+- **src/App.tsx**: Main React component that initializes Matter.js, sets up the physics engine, renders the SVG shapes, and handles mouse interactions.
+- **pathseg**: A polyfill for better handling of SVG paths in the browser.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Key Variables
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `THICCNESS`: Determines the thickness of the walls and ground in the simulation.
+- `SVG_WIDTH_IN_PX`: The base width of the SVG element.
+- `SVG_WIDTH_AS_PERCENT_OF_CONTAINER_WIDTH`: Defines how large the SVG should be relative to the container size.
+
+## Customization
+
+To change the SVG shapes or add new ones, modify the SVG elements inside the `#svgs` div in the `App.tsx` file. Each `<path>` element with the `id="matter-path"` will be converted into a physics body.
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
